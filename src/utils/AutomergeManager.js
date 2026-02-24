@@ -27,3 +27,4 @@ class AutomergeManager {
 }
 
 export default new AutomergeManager();
+ 
