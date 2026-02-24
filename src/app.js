@@ -15,9 +15,9 @@ class App {
   }
 
   routes() {
-    // this.app.use('/api/documents', documentRoutes);
+    this.app.use('/api/documents', documentRoutes);
+    this.app.get('/health', (req, res) => res.send('OK'));
   }
-  
 }
 
 export default new App().app;
