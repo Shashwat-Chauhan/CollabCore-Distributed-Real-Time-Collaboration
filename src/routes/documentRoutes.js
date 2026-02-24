@@ -1,9 +1,9 @@
 import express from 'express';
+import controller from '../controllers/DocumentController.js';
+
 const router = express.Router();
 
-
-// router.post('/', controller.create); because controller is a class and create is a method in it.
-// router.get('/:id', controller.get); similar.
+router.post('/', controller.create);
+router.get('/:id', controller.get);
 
 export default router;
-
