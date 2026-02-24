@@ -36,11 +36,12 @@ class DocumentService{
     }
 
 
-    async applyChanges(id , changeBuffer){
+    async applyChanges(id , changesBuffer){
         const entry = await this.loadDocument(id);
 
         entry.doc = automergeManager.applyChanges(entry.doc , changesBuffer);
-        entry.version += 1;
+        const incrementBy = Array.isArray(changesBuffer) ? changesBuffer.length : 1;
+        entry.version += incrementBy;
 
         const buffer = automergeManager.save(entry.doc);
         await repository.update(id , buffer , entry.version);

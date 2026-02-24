@@ -22,9 +22,10 @@ class DocumentSocket {
 
     socket.on('changes', async ({ docId, changesBase64 }) => {
       try {
-        const changesBuffer = Buffer.from(changesBase64, 'base64');
+        const base64List = Array.isArray(changesBase64) ? changesBase64 : [changesBase64];
+        const changesBuffers = base64List.map(b64 => Buffer.from(b64, 'base64'));
 
-        const updated = await service.applyChanges(docId, changesBuffer);
+        const updated = await service.applyChanges(docId, changesBuffers);
 
         socket.to(docId).emit('remoteChanges', {
           changesBase64,

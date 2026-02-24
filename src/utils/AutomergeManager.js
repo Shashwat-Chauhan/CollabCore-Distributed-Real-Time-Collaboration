@@ -19,8 +19,9 @@ class AutomergeManager {
     return Buffer.from(Automerge.save(doc));
   }
 
-  applyChanges(doc, changesBuffer) {
-    const changes = [new Uint8Array(changesBuffer)];
+  applyChanges(doc, changesBuffers) {
+    const buffers = Array.isArray(changesBuffers) ? changesBuffers : [changesBuffers];
+    const changes = buffers.map(buf => new Uint8Array(buf));
     const [updatedDoc] = Automerge.applyChanges(doc, changes);
     return updatedDoc;
   }

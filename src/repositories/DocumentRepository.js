@@ -1,4 +1,4 @@
-import db from '../config/database,js'
+import db from '../config/database.js'
 
 class DocumentRepository{
     async create ({id , title , buffer}){
@@ -24,7 +24,7 @@ class DocumentRepository{
     async update(id , buffer , version){
         const result = await db.query(
             `UPDATE docs
-            SET doc=$1 , version = $2 , update_at = now()
+            SET doc=$1 , version = $2
             WHERE id = $3
             RETURNING *`,
             [buffer , version , id]
